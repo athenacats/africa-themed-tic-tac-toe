@@ -9,11 +9,6 @@ const choosePlayers = document.getElementById("choosePlayers");
 const playerNameOne = document.getElementById("playerNameOne");
 const playerNameTwo = document.getElementById("playerNameTwo");
 
-btnPlayerNameOne.addEventListener("click", () => {
-  playerNameOne.style.display = "none";
-  playerNameTwo.style.display = "flex";
-});
-
 const numberOfPlayersRadios = document.querySelectorAll(
   'input[name="numberOfPlayers"]'
 );
@@ -34,3 +29,28 @@ btnChoosePlayers.addEventListener("click", () => {
     }
   }
 });
+
+const symbols = document.querySelectorAll('input[name="symbol"]');
+
+btnPlayerNameOne.addEventListener("click", () => {
+  for (const symbol of symbols) {
+    if (symbol.checked) {
+      if (symbol.value === "lion") {
+        playerNameOne.style.display = "none";
+        playerNameTwo.style.display = "flex";
+        document.getElementById("buffalo2").style.display = "flex";
+      } else if (symbol.value === "buffalo") {
+        playerNameOne.style.display = "none";
+        playerNameTwo.style.display = "flex";
+        document.getElementById("lion2").style.display = "flex";
+      }
+    } else if (!symbol.checked) {
+      document.getElementById("error2").style.display = "flex";
+      document.getElementById("error2").style.color = "red";
+      document.getElementById("error2").style.fontSize = "1rem";
+    }
+  }
+});
+
+/*playerNameOne.style.display = "none";
+playerNameTwo.style.display = "flex";*/
