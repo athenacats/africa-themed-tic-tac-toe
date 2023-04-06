@@ -83,7 +83,8 @@ form .radioButtons {
   font-size: 1.2rem;
 }
 
-.playerNameOne form {
+.playerNameOne form,
+.playerNameTwo form {
   display: none;
   background-color: var(--form-color);
   width: 60%;
@@ -106,7 +107,8 @@ form .radioButtons {
   transform: translate(-50%, -50%);
 }
 
-.playerNameOne input[type="text"] {
+.playerNameOne input[type="text"],
+.playerNameTwo input[type="text"] {
   width: 80%;
   max-width: 200px;
   align-self: center;
@@ -120,7 +122,8 @@ form .radioButtons {
   color: var(--color-primary);
 }
 
-.playerNameOne input[type="text"]:focus {
+.playerNameOne input[type="text"]:focus,
+.playerNameTwo input[type="text"]:focus {
   outline: 1px solid var(--color-primary);
   box-shadow: 0 0 16px var(--color-primary);
 }
