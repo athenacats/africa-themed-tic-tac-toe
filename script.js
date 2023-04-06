@@ -3,3 +3,7 @@ function Player(name, marker) {
   this.marker = marker;
 }
 
+function hide() {
+    const firstForm =document.querySelector(".choosePlayers")
+    firstForm.style.display = 'none'; 
+}
