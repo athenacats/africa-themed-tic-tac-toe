@@ -3,7 +3,12 @@ function Player(name, marker) {
   this.marker = marker;
 }
 
-function hide() {
-    const firstForm =document.querySelector(".choosePlayers")
-    firstForm.style.display = 'none'; 
-}
+const btnChoosePlayers = document.getElementById("btnChoosePlayers");
+
+btnChoosePlayers.addEventListener("click", () => {
+  const choosePlayers = document.getElementById("choosePlayers");
+  const playerNameOne = document.getElementById("playerNameOne");
+
+  choosePlayers.style.display = "none";
+  playerNameOne.style.display = "flex";
+});
