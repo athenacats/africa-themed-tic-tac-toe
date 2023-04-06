@@ -20,7 +20,7 @@
         <h1>African Tic Tac Toe</h1>
       </div>
       <div class="choosePlayers">
-        <form>
+        <form id="choosePlayers">
           <p>Choose Number Of Players</p>
           <div class="radioButtons">
             <input
@@ -37,6 +37,20 @@
               value="twoPlayers"
             />
             <label for="twoPlayers">2 Players</label>
+          </div>
+          <button type="button" id="btnChoosePlayers">Submit</button>
+        </form>
+      </div>
+      <div class="playerNameOne">
+        <form id="playerNameOne">
+          <label for="playerOne">Player One Name:</label>
+          <input type="text" id="playerOne" name="playerOne" />
+          <p>Choose Your Symbol</p>
+          <div class="radioButtons">
+            <input type="radio" id="lion" name="symbol" value="lion" />
+            <label for="lion">Lion</label>
+            <input type="radio" id="buffalo" name="symbol" value="buffalo" />
+            <label for="buffalo">Bufallo</label>
           </div>
           <button type="submit" onclick="hide()">Submit</button>
         </form>
