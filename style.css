@@ -8,3 +8,76 @@ body {
   font-family: "Merienda", cursive, "Gill Sans", "Gill Sans MT", Calibri,
     "Trebuchet MS", sans-serif;
 }
+
+:root {
+  --color-primary: #003348;
+  --font-color: #d56c33;
+  --form-color: #77925f;
+  --form-font: #d2b278;
+}
+
+body {
+  background-color: var(--color-primary);
+}
+
+.container {
+  margin: auto;
+  height: 100vh;
+}
+
+h1 {
+  padding-top: 40px;
+  text-align: center;
+  color: var(--font-color);
+  font-size: 3rem;
+}
+
+.choosePlayers {
+  margin: auto;
+}
+
+.choosePlayers form {
+  background-color: var(--form-color);
+  width: 60%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: center;
+  color: var(--color-primary);
+  border: 1px solid var(--form-font);
+  border-radius: 2rem;
+  box-shadow: 0 0 16px var(--form-color);
+  font-size: 1.2rem;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+form button {
+  background-color: var(--font-color);
+  font-family: "Merienda", cursive, "Gill Sans", "Gill Sans MT", Calibri,
+    "Trebuchet MS", sans-serif;
+  border: 1px solid var(--form-font);
+  box-shadow: 0 0 16px var(--form-font);
+  width: 50%;
+  align-self: center;
+  padding: 6px;
+  border-radius: 1rem;
+  font-size: 1rem;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+form button:hover {
+  color: var(--form-font);
+}
+
+form .radioButtons {
+  display: inline-block;
+  font-size: 1.2rem;
+}
