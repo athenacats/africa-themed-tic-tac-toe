@@ -5,9 +5,11 @@
 
 const btnChoosePlayers = document.getElementById("btnChoosePlayers");
 const btnPlayerNameOne = document.getElementById("btnPlayerNameOne");
+const btnPlayerNameTwo = document.getElementById("btnPlayerNameTwo");
 const choosePlayers = document.getElementById("choosePlayers");
 const playerNameOne = document.getElementById("playerNameOne");
 const playerNameTwo = document.getElementById("playerNameTwo");
+const gameGrid = document.getElementById("game");
 
 const numberOfPlayersRadios = document.querySelectorAll(
   'input[name="numberOfPlayers"]'
@@ -20,6 +22,7 @@ btnChoosePlayers.addEventListener("click", () => {
         choosePlayers.style.display = "none";
         playerNameOne.style.display = "flex";
       } else if (numberOfPlayersRadio.value === "onePlayer") {
+        game.style.display = "grid";
         choosePlayers.style.display = "none";
       }
     } else if (!numberOfPlayersRadio.checked) {
@@ -50,6 +53,11 @@ btnPlayerNameOne.addEventListener("click", () => {
       document.getElementById("error2").style.fontSize = "1rem";
     }
   }
+});
+
+btnPlayerNameTwo.addEventListener("click", () => {
+  playerNameTwo.style.display = "none";
+  game.style.display = "grid";
 });
 
 /*playerNameOne.style.display = "none";
