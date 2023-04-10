@@ -38,11 +38,11 @@ h1 {
 }
 
 .choosePlayers form {
-  display: none;
+  /*display: none;*/
   background-color: var(--form-color);
   width: 60%;
   padding: 40px;
-  /*display: flex;*/
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
@@ -152,8 +152,8 @@ form .radioButtons {
   cursor: pointer;
 }
 
-.game {
-  display: grid;
+#game {
+  display: none;
   grid-template-columns: 1fr 4fr;
   justify-content: space-around;
   align-items: center;
