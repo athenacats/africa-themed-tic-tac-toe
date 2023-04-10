@@ -14,6 +14,7 @@ body {
   --font-color: #d56c33;
   --form-color: #77925f;
   --form-font: #d2b278;
+  --details-shadow: #001a25;
 }
 
 body {
@@ -133,7 +134,7 @@ form .radioButtons {
   grid-template-columns: repeat(3, minmax(50px, 1fr));
   grid-template-rows: repeat(3, minmax(50px, 1fr));
   height: 450px;
-  margin: auto;
+
   align-self: center;
   padding-top: 20px;
   max-width: 450px;
@@ -144,4 +145,38 @@ form .radioButtons {
   background-color: var(--form-font);
   border: 1px solid var(--font-color);
   border-collapse: collapse;
+  cursor: url(../../Desktop/icons/lion4.svg), auto;
+}
+
+.grid-cell:hover {
+  cursor: pointer;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.playerOneDetails,
+.playerTwoDetails,
+.computerDetails {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: var(--form-color);
+  border-radius: 8px;
+  color: var(--color-primary);
+  border: 1px solid var(--form-font);
+  box-shadow: 0 0 8px var(--form-color);
 }
