@@ -170,6 +170,8 @@ btnPlayerNameOne.addEventListener("click", () => {
         playerNameOne.style.display = "none";
         playerNameTwo.style.display = "flex";
         document.getElementById("buffalo2").style.display = "flex";
+        document.getElementById("playerOneName").innerHTML =
+          document.forms["playerNameOne"]["playerOne"].value;
       } else if (
         symbol.value === "buffalo" &&
         !document.forms["playerNameOne"]["playerOne"].value == ""
@@ -177,6 +179,8 @@ btnPlayerNameOne.addEventListener("click", () => {
         playerNameOne.style.display = "none";
         playerNameTwo.style.display = "flex";
         document.getElementById("lion2").style.display = "flex";
+        document.getElementById("playerOneName").innerHTML =
+          document.forms["playerNameOne"]["playerOne"].value;
       }
     } else if (
       !symbol.checked &&
@@ -206,6 +210,8 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         onlyOnePlayer.style.display = "none";
         gameGrid.style.display = "grid";
         document.querySelector(".playerTwoDetails").style.display = "none";
+        document.getElementById("playerOneName").innerHTML =
+          document.forms["onlyOnePlayer"]["playerOne"].value;
         game();
       } else if (
         symbol.value === "buffalo" &&
@@ -214,6 +220,8 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         onlyOnePlayer.style.display = "none";
         gameGrid.style.display = "grid";
         document.querySelector(".playerTwoDetails").style.display = "none";
+        document.getElementById("playerOneName").innerHTML =
+          document.forms["onlyOnePlayer"]["playerOne"].value;
         game();
       }
     } else if (
@@ -239,6 +247,8 @@ btnPlayerNameTwo.addEventListener("click", () => {
   gameGrid.style.display = "grid";
   document.querySelector(".computerDetails").style.display = "none";
   game();
+  document.getElementById("playerTwoName").innerHTML =
+    document.forms["playerNameTwo"]["playerTwo"].value;
 });
 
 /*const playerOneName = document.getElementById("playerOneName");
