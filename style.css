@@ -197,7 +197,15 @@ button#reset {
 }
 
 .bufalloIcon {
-  background-image: url(images/buffalo.svg);
+  background-image: url(images/buffalo.png);
+  height: 3rem;
+  box-sizing: border-box;
+}
+
+.lionIcon {
+  background-image: url(images/lion.png);
+  height: 3rem;
+  box-sizing: border-box;
 }
 
 .winnerBanner {
