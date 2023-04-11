@@ -183,10 +183,6 @@ form .radioButtons {
   box-shadow: 0 0 8px var(--form-color);
 }
 
-div#resetButton {
-  grid-column: 1/-1;
-}
-
 button#reset {
   padding: 8px;
   background-color: var(--font-color);
@@ -208,6 +204,6 @@ button#reset {
   box-sizing: border-box;
 }
 
-.winnerBanner {
+.winnerBanner .closePopup {
   display: none;
 }
