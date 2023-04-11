@@ -1,8 +1,3 @@
-/* function Player(name, marker) {
-  this.name = name;
-  this.marker = marker;
-} */
-
 const btnChoosePlayers = document.getElementById("btnChoosePlayers");
 const btnPlayerNameOne = document.getElementById("btnPlayerNameOne");
 const btnPlayerNameTwo = document.getElementById("btnPlayerNameTwo");
@@ -26,9 +21,9 @@ btnChoosePlayers.addEventListener("click", () => {
         choosePlayers.style.display = "none";
       }
     } else if (!numberOfPlayersRadio.checked) {
-      document.getElementById("error").style.display = "flex";
-      document.getElementById("error").style.color = "red";
-      document.getElementById("error").style.fontSize = "1rem";
+      document.getElementById("error1").style.display = "flex";
+      document.getElementById("error1").style.color = "red";
+      document.getElementById("error1").style.fontSize = "1rem";
     }
   }
 });
@@ -38,16 +33,32 @@ const symbols = document.querySelectorAll('input[name="symbol"]');
 btnPlayerNameOne.addEventListener("click", () => {
   for (const symbol of symbols) {
     if (symbol.checked) {
-      if (symbol.value === "lion") {
+      if (
+        symbol.value === "lion" &&
+        !document.forms["playerNameOne"]["playerOne"].value == ""
+      ) {
         playerNameOne.style.display = "none";
         playerNameTwo.style.display = "flex";
         document.getElementById("buffalo2").style.display = "flex";
-      } else if (symbol.value === "buffalo") {
+      } else if (
+        symbol.value === "buffalo" &&
+        !document.forms["playerNameOne"]["playerOne"].value == ""
+      ) {
         playerNameOne.style.display = "none";
         playerNameTwo.style.display = "flex";
         document.getElementById("lion2").style.display = "flex";
       }
-    } else if (!symbol.checked) {
+    } else if (
+      !symbol.checked &&
+      document.forms["playerNameOne"]["playerOne"].value == ""
+    ) {
+      document.getElementById("error2").style.display = "flex";
+      document.getElementById("error2").style.color = "red";
+      document.getElementById("error2").style.fontSize = "1rem";
+    } else if (
+      symbol.checked &&
+      document.forms["playerNameOne"]["playerOne"].value == ""
+    ) {
       document.getElementById("error2").style.display = "flex";
       document.getElementById("error2").style.color = "red";
       document.getElementById("error2").style.fontSize = "1rem";
@@ -68,7 +79,7 @@ function insertNames() {
   playerTwoName.append(playerTwo.value);
 }*/
 
-const playerFactory = (name, symbol) => {
+/*const playerFactory = (name, symbol) => {
   const playerturn = (grid, cell) => {
     const index = grid.cells.findIndex(function (position) {
       return position === cell;
@@ -148,4 +159,4 @@ const gamePlay = (() => {
     } else {
       gameStatus.textContent = 'Board: ';
     }
-})
+})*/
