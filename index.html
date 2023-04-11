@@ -47,7 +47,13 @@
       <div class="playerNameOne">
         <form id="playerNameOne">
           <label for="playerOne">Player One Name:</label>
-          <input type="text" id="playerOne" name="playerOne" />
+          <input
+            type="text"
+            id="playerOne"
+            name="playerOne"
+            placeholder="Aria"
+            required
+          />
           <p>Choose Your Symbol</p>
           <div class="radioButtons">
             <input type="radio" id="lion" name="symbol" value="lion" />
@@ -62,7 +68,13 @@
       <div class="playerNameTwo">
         <form id="playerNameTwo">
           <label for="playerTwo">Player Two Name:</label>
-          <input type="text" id="playerTwo" name="playerTwo" />
+          <input
+            type="text"
+            id="playerTwo"
+            name="playerTwo"
+            placeholder="Ceres"
+            required
+          />
           <p id="lion2" style="display: none">Your Symbol is the Lion</p>
           <p id="buffalo2" style="display: none">Your Symbol is the Buffalo</p>
           <button type="button" id="btnPlayerNameTwo">Submit</button>
@@ -71,11 +83,11 @@
       <div id="game">
         <div class="details">
           <div class="playerOneDetails">
-            <h3 class="playerOneName">Esther</h3>
+            <h3 id="playerOneName"></h3>
             <p class="playerOneScore"></p>
           </div>
           <div class="playerTwoDetails">
-            <h3 class="playerTwoName"></h3>
+            <h3 id="playerTwoName"></h3>
             <p class="playerTwoScore"></p>
           </div>
           <div class="computerDetails">
@@ -85,16 +97,18 @@
         </div>
 
         <div class="grid">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
         </div>
+
+        <button id="reset">Restart</button>
       </div>
     </div>
   </body>

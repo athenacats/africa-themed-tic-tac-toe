@@ -141,14 +141,14 @@ form .radioButtons {
   max-height: 450px;
 }
 
-.grid-cell {
+.cell {
   background-color: var(--form-font);
   border: 1px solid var(--font-color);
   border-collapse: collapse;
   cursor: url(../../Desktop/icons/lion4.svg), auto;
 }
 
-.grid-cell:hover {
+.cell:hover {
   cursor: pointer;
 }
 
