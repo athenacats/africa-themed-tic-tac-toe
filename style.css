@@ -148,7 +148,6 @@ form .radioButtons {
   background-color: var(--form-font);
   border: 1px solid var(--font-color);
   border-collapse: collapse;
-  cursor: url(../../Desktop/icons/lion4.svg), auto;
 }
 
 .cell:hover {
@@ -182,4 +181,17 @@ form .radioButtons {
   color: var(--color-primary);
   border: 1px solid var(--form-font);
   box-shadow: 0 0 8px var(--form-color);
+}
+
+div#resetButton {
+  grid-column: 1/-1;
+}
+
+button#reset {
+  padding: 8px;
+  background-color: var(--font-color);
+  color: var(--details-shadow);
+  border-radius: 8px;
+  box-shadow: 0 0 8px var(--form-font);
+  border: 1px solid var(--form-font);
 }
