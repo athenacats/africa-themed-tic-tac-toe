@@ -172,6 +172,10 @@ btnPlayerNameOne.addEventListener("click", () => {
         document.getElementById("buffalo2").style.display = "flex";
         document.getElementById("playerOneName").innerHTML =
           document.forms["playerNameOne"]["playerOne"].value;
+        document.getElementById("playerOneSymbol").innerHTML =
+          '<img src="images/lion.png" height="40rem"  />';
+        document.getElementById("playerTwoSymbol").innerHTML =
+          '<img src="images/buffalo.png" height="40rem"  />';
       } else if (
         symbol.value === "buffalo" &&
         !document.forms["playerNameOne"]["playerOne"].value == ""
@@ -181,6 +185,10 @@ btnPlayerNameOne.addEventListener("click", () => {
         document.getElementById("lion2").style.display = "flex";
         document.getElementById("playerOneName").innerHTML =
           document.forms["playerNameOne"]["playerOne"].value;
+        document.getElementById("playerOneSymbol").innerHTML =
+          '<img src="images/buffalo.png" height="40rem"  />';
+        document.getElementById("playerTwoSymbol").innerHTML =
+          '<img src="images/lion.png" height="40rem"  />';
       }
     } else if (
       !symbol.checked &&
@@ -212,6 +220,11 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         document.querySelector(".playerTwoDetails").style.display = "none";
         document.getElementById("playerOneName").innerHTML =
           document.forms["onlyOnePlayer"]["playerOne"].value;
+        document.getElementById("playerOneSymbol").innerHTML =
+          '<img src="images/lion.png" height="40rem"  />';
+        document.getElementById("computerSymbol").innerHTML =
+          '<img src="images/buffalo.png" height="40rem"  />';
+
         game();
       } else if (
         symbol.value === "buffalo" &&
@@ -222,6 +235,10 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         document.querySelector(".playerTwoDetails").style.display = "none";
         document.getElementById("playerOneName").innerHTML =
           document.forms["onlyOnePlayer"]["playerOne"].value;
+        document.getElementById("playerOneSymbol").innerHTML =
+          '<img src="images/buffalo.png" height="40rem"  />';
+        document.getElementById("computerSymbol").innerHTML =
+          '<img src="images/lion.png" height="40rem"  />';
         game();
       }
     } else if (
