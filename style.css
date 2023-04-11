@@ -207,3 +207,12 @@ button#reset {
 .winnerBanner .closePopup {
   display: none;
 }
+
+.winnerBanner {
+  background-color: var(--form-font);
+  color: var(--details-shadow);
+  border-radius: 8px;
+  box-shadow: 0 0 8px var(--form-font);
+  border: 1px solid var(--form-font);
+  padding: 8px;
+}
