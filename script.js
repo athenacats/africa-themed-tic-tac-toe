@@ -1,10 +1,12 @@
 const btnChoosePlayers = document.getElementById("btnChoosePlayers");
 const btnPlayerNameOne = document.getElementById("btnPlayerNameOne");
 const btnPlayerNameTwo = document.getElementById("btnPlayerNameTwo");
+const btnOnlyOnePlayer = document.getElementById("btnOnlyOnePlayer");
 const choosePlayers = document.getElementById("choosePlayers");
 const playerNameOne = document.getElementById("playerNameOne");
 const playerNameTwo = document.getElementById("playerNameTwo");
 const gameGrid = document.getElementById("game");
+const onlyOnePlayer = document.getElementById("onlyOnePlayer");
 
 const numberOfPlayersRadios = document.querySelectorAll(
   'input[name="numberOfPlayers"]'
@@ -17,8 +19,8 @@ btnChoosePlayers.addEventListener("click", () => {
         choosePlayers.style.display = "none";
         playerNameOne.style.display = "flex";
       } else if (numberOfPlayersRadio.value === "onePlayer") {
-        game.style.display = "grid";
         choosePlayers.style.display = "none";
+        onlyOnePlayer.style.display = "flex";
       }
     } else if (!numberOfPlayersRadio.checked) {
       document.getElementById("error1").style.display = "flex";
@@ -58,6 +60,40 @@ btnPlayerNameOne.addEventListener("click", () => {
     } else if (
       symbol.checked &&
       document.forms["playerNameOne"]["playerOne"].value == ""
+    ) {
+      document.getElementById("error2").style.display = "flex";
+      document.getElementById("error2").style.color = "red";
+      document.getElementById("error2").style.fontSize = "1rem";
+    }
+  }
+});
+
+btnOnlyOnePlayer.addEventListener("click", () => {
+  for (const symbol of symbols) {
+    if (symbol.checked) {
+      if (
+        symbol.value === "lion" &&
+        !document.forms["onlyOnePlayer"]["playerOne"].value == ""
+      ) {
+        onlyOnePlayer.style.display = "none";
+        gameGrid.style.display = "flex";
+      } else if (
+        symbol.value === "buffalo" &&
+        !document.forms["onlyOnePlayer"]["playerOne"].value == ""
+      ) {
+        onlyOnePlayer.style.display = "none";
+        gameGrid.style.display = "flex";
+      }
+    } else if (
+      !symbol.checked &&
+      document.forms["onlyOnePlayer"]["playerOne"].value == ""
+    ) {
+      document.getElementById("error2").style.display = "flex";
+      document.getElementById("error2").style.color = "red";
+      document.getElementById("error2").style.fontSize = "1rem";
+    } else if (
+      symbol.checked &&
+      document.forms["onlyOnePlayer"]["playerOne"].value == ""
     ) {
       document.getElementById("error2").style.display = "flex";
       document.getElementById("error2").style.color = "red";

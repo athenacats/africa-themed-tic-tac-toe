@@ -44,6 +44,29 @@
           <button type="button" id="btnChoosePlayers">Submit</button>
         </form>
       </div>
+      <div class="onlyOnePlayer">
+        <form id="onlyOnePlayer" name="onlyOnePlayer">
+          <label for="playerOne">Player One Name:</label>
+          <input
+            type="text"
+            id="playerOne"
+            name="playerOne"
+            placeholder="Aria"
+            required
+          />
+          <p>Choose Your Symbol</p>
+          <div class="radioButtons">
+            <input type="radio" id="lion" name="symbol" value="lion" />
+            <label for="lion">Lion</label>
+            <input type="radio" id="buffalo" name="symbol" value="buffalo" />
+            <label for="buffalo">Buffalo</label>
+          </div>
+          <p id="error2" style="display: none">
+            You must choose your name and select a symbol
+          </p>
+          <button type="button" id="btnOnlyOnePlayer">Submit</button>
+        </form>
+      </div>
       <div class="playerNameOne">
         <form id="playerNameOne" name="playerNameOne">
           <label for="playerOne">Player One Name:</label>
@@ -86,15 +109,15 @@
         <div class="details">
           <div class="playerOneDetails">
             <h3 id="playerOneName"></h3>
-            <p class="playerOneScore"></p>
+            <p class="playerOneSymbol"></p>
           </div>
           <div class="playerTwoDetails">
             <h3 id="playerTwoName"></h3>
-            <p class="playerTwoScore"></p>
+            <p class="playerTwoSymbol"></p>
           </div>
           <div class="computerDetails">
             <h3 class="computerName">Computer</h3>
-            <p class="computerScore"></p>
+            <p class="computerSymbol"></p>
           </div>
         </div>
 

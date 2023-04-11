@@ -85,7 +85,8 @@ form .radioButtons {
 }
 
 .playerNameOne form,
-.playerNameTwo form {
+.playerNameTwo form,
+.onlyOnePlayer form {
   display: none;
   background-color: var(--form-color);
   width: 60%;
@@ -109,7 +110,8 @@ form .radioButtons {
 }
 
 .playerNameOne input[type="text"],
-.playerNameTwo input[type="text"] {
+.playerNameTwo input[type="text"],
+.onlyOnePlayer input[type="text"] {
   width: 80%;
   max-width: 200px;
   align-self: center;
@@ -124,7 +126,8 @@ form .radioButtons {
 }
 
 .playerNameOne input[type="text"]:focus,
-.playerNameTwo input[type="text"]:focus {
+.playerNameTwo input[type="text"]:focus,
+.onlyOnePlayer input[type="text"]:focus {
   outline: 1px solid var(--color-primary);
   box-shadow: 0 0 16px var(--color-primary);
 }
