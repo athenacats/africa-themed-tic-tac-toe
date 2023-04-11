@@ -1,3 +1,131 @@
+const game = () => {
+  let gameBoard = ["", "", "", "", "", "", "", "", ""];
+  let currentPlayer = "";
+  let playerOneName = "";
+  let playerOneSymbol = "";
+  let playerTwoName = "";
+  let playerTwoSymbol = "";
+  let computerName = "Computer";
+  let computerSymbol = "";
+  let numberOfPlayers = "";
+  let winner = "";
+
+  const getGameBoard = () => gameBoard;
+  const getCurrentPlayer = () => currentPlayer;
+  const getPlayerOneName = () => playerOneName;
+  const getPlayerOneSymbol = () => playerOneSymbol;
+  const getPlayerTwoName = () => playerTwoName;
+  const getPlayerTwoSymbol = () => playerTwoSymbol;
+  const getComputerName = () => computerName;
+  const getComputerSymbol = () => computerSymbol;
+  const getNumberOfPlayers = () => numberOfPlayers;
+  const getWinner = () => winner;
+
+  const setGameBoard = (board) => (gameBoard = board);
+
+  const setCurrentPlayer = (newCurrentPlayer) => {
+    currentPlayer = newCurrentPlayer;
+  };
+
+  const setPlayerOneName = (newPlayerOneName) => {
+    playerOneName = newPlayerOneName;
+  };
+
+  const setPlayerOneSymbol = (newPlayerOneSymbol) => {
+    playerOneSymbol = newPlayerOneSymbol;
+  };
+
+  const setPlayerTwoName = (newPlayerTwoName) => {
+    playerTwoName = newPlayerTwoName;
+  };
+
+  const setPlayerTwoSymbol = (newPlayerTwoSymbol) => {
+    playerTwoSymbol = newPlayerTwoSymbol;
+  };
+
+  const setComputerSymbol = (newComputerSymbol) => {
+    computerSymbol = newComputerSymbol;
+  };
+
+  const setNumberOfPlayers = (newNumberOfPlayers) => {
+    numberOfPlayers = newNumberOfPlayers;
+  };
+
+  const setWinner = (newWinner) => {
+    winner = newWinner;
+  };
+
+  const checkForWinner = () => {
+    const winningCombinations = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    const winningCombinationsLength = winningCombinations.length;
+
+    for (let i = 0; i < winningCombinationsLength; i++) {
+      const [a, b, c] = winningCombinations[i];
+      if (
+        gameBoard[a] !== "" &&
+        gameBoard[a] === gameBoard[b] &&
+        gameBoard[b] === gameBoard[c]
+      ) {
+        setWinner(currentPlayer);
+        return true;
+      }
+    }
+
+    if (!gameBoard.includes("")) {
+      setWinner("tie");
+      return true;
+    }
+    return false;
+  };
+
+  const resetGame = () => {
+    setGameBoard(["", "", "", "", "", "", "", "", ""]);
+    setCurrentPlayer("");
+    setPlayerOneName("");
+    setPlayerOneSymbol("");
+    setPlayerTwoName("");
+    setPlayerTwoSymbol("");
+    setComputerSymbol("");
+    setNumberOfPlayers("");
+    setWinner("");
+  };
+
+  return {
+    getGameBoard,
+    getCurrentPlayer,
+    getPlayerOneName,
+    getPlayerOneSymbol,
+    getPlayerTwoName,
+    getPlayerTwoSymbol,
+    getComputerSymbol,
+    getComputerName,
+    getNumberOfPlayers,
+    getWinner,
+    setGameBoard,
+    setCurrentPlayer,
+    setPlayerOneName,
+    setPlayerOneSymbol,
+    setPlayerTwoName,
+    setPlayerTwoSymbol,
+    setComputerSymbol,
+    setComputerSymbol,
+    setNumberOfPlayers,
+    setWinner,
+    resetGame,
+    checkForWinner,
+  };
+};
+
 const btnChoosePlayers = document.getElementById("btnChoosePlayers");
 const btnPlayerNameOne = document.getElementById("btnPlayerNameOne");
 const btnPlayerNameTwo = document.getElementById("btnPlayerNameTwo");
@@ -78,6 +206,7 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         onlyOnePlayer.style.display = "none";
         gameGrid.style.display = "grid";
         document.querySelector(".playerTwoDetails").style.display = "none";
+        game();
       } else if (
         symbol.value === "buffalo" &&
         !document.forms["onlyOnePlayer"]["playerOne"].value == ""
@@ -85,6 +214,7 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         onlyOnePlayer.style.display = "none";
         gameGrid.style.display = "grid";
         document.querySelector(".playerTwoDetails").style.display = "none";
+        game();
       }
     } else if (
       !symbol.checked &&
@@ -106,8 +236,9 @@ btnOnlyOnePlayer.addEventListener("click", () => {
 
 btnPlayerNameTwo.addEventListener("click", () => {
   playerNameTwo.style.display = "none";
-  game.style.display = "grid";
+  gameGrid.style.display = "grid";
   document.querySelector(".computerDetails").style.display = "none";
+  game();
 });
 
 /*const playerOneName = document.getElementById("playerOneName");

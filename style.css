@@ -195,3 +195,7 @@ button#reset {
   box-shadow: 0 0 8px var(--form-font);
   border: 1px solid var(--form-font);
 }
+
+.bufalloIcon {
+  background-image: url(images/buffalo.svg);
+}
