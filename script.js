@@ -76,13 +76,15 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         !document.forms["onlyOnePlayer"]["playerOne"].value == ""
       ) {
         onlyOnePlayer.style.display = "none";
-        gameGrid.style.display = "flex";
+        gameGrid.style.display = "grid";
+        document.querySelector(".playerTwoDetails").style.display = "none";
       } else if (
         symbol.value === "buffalo" &&
         !document.forms["onlyOnePlayer"]["playerOne"].value == ""
       ) {
         onlyOnePlayer.style.display = "none";
-        gameGrid.style.display = "flex";
+        gameGrid.style.display = "grid";
+        document.querySelector(".playerTwoDetails").style.display = "none";
       }
     } else if (
       !symbol.checked &&
@@ -105,6 +107,7 @@ btnOnlyOnePlayer.addEventListener("click", () => {
 btnPlayerNameTwo.addEventListener("click", () => {
   playerNameTwo.style.display = "none";
   game.style.display = "grid";
+  document.querySelector(".computerDetails").style.display = "none";
 });
 
 /*const playerOneName = document.getElementById("playerOneName");
