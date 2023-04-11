@@ -331,8 +331,8 @@ const gridModule = (() => {
 })();
 
 const gamePlay = (() => {
-  const playerOneName = document.getElementById("playerOneName");
-  const playerTwoName = document.getElementById("playerTwoName");
+  const playerOneName = document.getElementById("playerOneName").innerHTML;
+  const playerTwoName = document.getElementById("playerTwoName").innerHTML;
   const resetbtn = document.querySelector("#reset");
   let currentPlayer;
   let player1;
@@ -373,9 +373,9 @@ const gamePlay = (() => {
   };
 
   const gameInit = () => {
-    if (playerOneName.value !== "" && playerTwoName.value !== "") {
-      player1 = playerFactory(playerOneName.value, "X");
-      player2 = playerFactory(playerTwoName.value, "O");
+    if (playerOneName.textContent !== "" && playerTwoName.textContent !== "") {
+      player1 = playerFactory(playerOneName.textContent, "X");
+      player2 = playerFactory(playerTwoName.textContent, "O");
       currentPlayer = player1;
       gameRound();
     }
