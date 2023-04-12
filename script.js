@@ -264,124 +264,129 @@ btnPlayerNameTwo.addEventListener("click", () => {
   document.querySelector(".computerDetails").style.display = "none";
   document.getElementById("playerTwoName").innerHTML =
     document.forms["playerNameTwo"]["playerTwo"].value;
-});
 
-const playerFactory = (name, mark) => {
-  const playerTurn = (grid, cell) => {
-    const index = grid.cells.findIndex(function (position) {
-      return position === cell;
-    });
-    if (grid.gridArray[index] === "") {
-      grid.render();
-      return index;
-    }
-    return null;
-  };
-  return { name, mark, playerTurn };
-};
-
-const gridModule = (() => {
-  let gridArray = ["", "", "", "", "", "", "", "", ""];
-  const gameBoard = document.querySelector(".grid");
-  const cells = Array.from(document.querySelectorAll(".cell"));
-  let winner = null;
-
-  const render = () => {
-    gridArray.forEach((mark, index) => {
-      cells[index].textContent = gridArray[index];
-    });
-  };
-
-  const reset = () => {
-    gridArray = ["", "", "", "", "", "", "", "", ""];
-  };
-
-  const checkWinner = () => {
-    const winningArrays = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-
-    winningArrays.forEach((combo) => {
-      if (
-        gridArray[combo[0]] &&
-        gridArray[combo[0]] === gridArray[combo[1]] &&
-        gridArray[combo[0]] === gridArray[combo[2]]
-      ) {
-        winner = "current";
-      }
-    });
-    return winner || (gridArray.includes("") ? null : "Tie");
-  };
-
-  return {
-    render,
-    gameBoard,
-    cells,
-    gridArray,
-    checkWinner,
-    reset,
-  };
-})();
-
-const gamePlay = (() => {
-  const playerOneName = document.getElementById("playerOneName").innerHTML;
-  const playerTwoName = document.getElementById("playerTwoName").innerHTML;
-  const resetbtn = document.querySelector("#reset");
-  let currentPlayer;
-  let player1;
-  let player2;
-
-  const switchTurn = () => {
-    currentPlayer = currentPlayer === player1 ? player2 : player1;
-  };
-
-  const gameRound = () => {
-    const grid = gridModule;
-    const gameStatus = document.querySelector(".winnertext");
-    if (currentPlayer.name !== "") {
-      gameStatus.textContent = `${currentPlayer.name}'s Turn`;
-    } else {
-      gameStatus.textContent = "Board: ";
-    }
-
-    grid.gameBoard.addEventListener("click", (event) => {
-      event.preventDefault();
-      const play = currentPlayer.playerTurn(grid, event.target);
-      if (play !== null) {
-        grid.gridArray[play] = `${currentPlayer.mark}`;
+  const playerFactory = (name, mark) => {
+    const playerTurn = (grid, cell) => {
+      const index = grid.cells.findIndex(function (position) {
+        return position === cell;
+      });
+      if (grid.gridArray[index] === "") {
         grid.render();
-        const winStatus = grid.checkWinner();
-        if (winStatus === "Tie") {
-          gameStatus.textContent = "Tie!";
-        } else if (winStatus === null) {
-          switchTurn();
-          gameStatus.textContent = `${currentPlayer.name}'s Turn`;
-        } else {
-          gameStatus.textContent = `Winner is ${currentPlayer.name}`;
-          grid.reset();
-          grid.render();
-        }
+        return index;
       }
-    });
+      return null;
+    };
+    return { name, mark, playerTurn };
   };
 
-  const gameInit = () => {
-    if (playerOneName.textContent !== "" && playerTwoName.textContent !== "") {
-      player1 = playerFactory(playerOneName.textContent, "X");
-      player2 = playerFactory(playerTwoName.textContent, "O");
-      currentPlayer = player1;
-      gameRound();
-    }
-  };
+  const gridModule = (() => {
+    let gridArray = ["", "", "", "", "", "", "", "", ""];
+    const gameBoard = document.querySelector(".grid");
+    const cells = Array.from(document.querySelectorAll(".cell"));
+    let winner = null;
 
-  /*form.addEventListener("submit", (event) => {
+    const render = () => {
+      gridArray.forEach((mark, index) => {
+        cells[index].textContent = gridArray[index];
+      });
+    };
+
+    const reset = () => {
+      gridArray = ["", "", "", "", "", "", "", "", ""];
+    };
+
+    const checkWinner = () => {
+      const winningArrays = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      winningArrays.forEach((combo) => {
+        if (
+          gridArray[combo[0]] &&
+          gridArray[combo[0]] === gridArray[combo[1]] &&
+          gridArray[combo[0]] === gridArray[combo[2]]
+        ) {
+          winner = "current";
+        }
+      });
+      return winner || (gridArray.includes("") ? null : "Tie");
+    };
+
+    return {
+      render,
+      gameBoard,
+      cells,
+      gridArray,
+      checkWinner,
+      reset,
+    };
+  })();
+
+  const gamePlay = (() => {
+    const playerOneName = document.getElementById("playerOneName").textContent;
+    const playerTwoName = document.getElementById("playerTwoName").textContent;
+    const resetbtn = document.querySelector("#reset");
+    let currentPlayer;
+    let player1;
+    let player2;
+    console.log(playerOneName);
+
+    const switchTurn = () => {
+      currentPlayer = currentPlayer === player1 ? player2 : player1;
+    };
+
+    const gameRound = () => {
+      const grid = gridModule;
+      const gameStatus = document.querySelector(".winnertext");
+      if (currentPlayer.name !== "") {
+        gameStatus.textContent = `${currentPlayer.name}'s Turn`;
+      } else {
+        gameStatus.textContent = "Let's Play!";
+      }
+
+      grid.gameBoard.addEventListener("click", (event) => {
+        event.preventDefault();
+        const play = currentPlayer.playerTurn(grid, event.target);
+        if (play !== null) {
+          grid.gridArray[play] = `${currentPlayer.mark}`;
+          grid.render();
+          const winStatus = grid.checkWinner();
+          if (winStatus === "Tie") {
+            gameStatus.textContent = "It's a tie!";
+          } else if (winStatus === null) {
+            switchTurn();
+            gameStatus.textContent = `${currentPlayer.name}'s Turn`;
+          } else {
+            gameStatus.textContent = `The winner is ${currentPlayer.name}!`;
+            grid.reset();
+            grid.render();
+          }
+        }
+      });
+      return playerOneName;
+    };
+
+    const gameInit = () => {
+      if (
+        playerOneName.textContent !== "" &&
+        playerTwoName.textContent !== ""
+      ) {
+        player1 = playerFactory(playerOneName.textContent, "X");
+        player2 = playerFactory(playerTwoName.textContent, "O");
+        currentPlayer = player1;
+        console.log(playerOneName);
+        gameRound();
+      }
+    };
+
+    /*form.addEventListener("submit", (event) => {
     event.preventDefault();
     if (playerOneName.value !== "" && playerTwoName.value !== "") {
       gameInit();
@@ -392,15 +397,16 @@ const gamePlay = (() => {
     }
   });*/
 
-  resetbtn.addEventListener("click", () => {
-    document.querySelector(".winnertext").textContent = "Board: ";
-    document.querySelector("#player1").value = "";
-    document.querySelector("#player2").value = "";
-    window.location.reload();
-  });
-  return {
-    gameInit,
-  };
-})();
+    resetbtn.addEventListener("click", () => {
+      document.querySelector(".winnertext").textContent = "Let's Play!";
+      document.querySelector("#player1").value = "";
+      document.querySelector("#player2").value = "";
+      window.location.reload();
+    });
+    return {
+      gameInit,
+    };
+  })();
 
-gamePlay.gameInit();
+  gamePlay.gameInit();
+});
