@@ -304,6 +304,7 @@ btnPlayerNameTwo.addEventListener("click", () => {
     const render = () => {
       gridArray.forEach((mark, index) => {
         cells[index].textContent = gridArray[index];
+        cells[index].innerHTML = "";
         if (mark) {
           const img = document.createElement("img");
           img.src = mark.src;
@@ -354,8 +355,8 @@ btnPlayerNameTwo.addEventListener("click", () => {
   const gamePlay = (() => {
     const playerOneName = document.getElementById("playerOneName").textContent;
     const playerTwoName = document.getElementById("playerTwoName").textContent;
-    const player1Symbol = document.querySelector("#playerOneSymbol").innerHTML;
-    const player2Symbol = document.querySelector("#playerTwoSymbol").innerHTML;
+    const player1Symbol = document.querySelector("#playerOneSymbol img");
+    const player2Symbol = document.querySelector("#playerTwoSymbol img");
     const resetbtn = document.querySelector("#reset");
     /*const parser = new DOMParser();
     const player1SymbolImg = parser.parseFromString(player1Symbol, "text/html");
