@@ -266,7 +266,7 @@ btnPlayerNameTwo.addEventListener("click", () => {
     document.forms["playerNameTwo"]["playerTwo"].value;
 });
 
-const playerFactory = (name, symbol) => {
+const playerFactory = (name, mark) => {
   const playerTurn = (grid, cell) => {
     const index = grid.cells.findIndex(function (position) {
       return position === cell;
@@ -277,7 +277,7 @@ const playerFactory = (name, symbol) => {
     }
     return null;
   };
-  return { name, symbol, playerTurn };
+  return { name, mark, playerTurn };
 };
 
 const gridModule = (() => {
@@ -287,7 +287,7 @@ const gridModule = (() => {
   let winner = null;
 
   const render = () => {
-    gridArray.forEach((symbol, index) => {
+    gridArray.forEach((mark, index) => {
       cells[index].textContent = gridArray[index];
     });
   };
