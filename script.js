@@ -174,10 +174,14 @@ btnPlayerNameOne.addEventListener("click", () => {
         document.getElementById("buffalo2").style.display = "flex";
         document.getElementById("playerOneName").innerHTML =
           document.forms["playerNameOne"]["playerOne"].value;
-        document.getElementById("playerOneSymbol").innerHTML =
-          '<img src="images/lion.png" height="40rem"  />';
-        document.getElementById("playerTwoSymbol").innerHTML =
-          '<img src="images/buffalo.png" height="40rem"  />';
+        document
+          .getElementById("playerOneSymbol")
+          .appendChild(new Image(40, 40)).src =
+          "images/" + symbol.value + ".png";
+        document
+          .getElementById("playerTwoSymbol")
+          .appendChild(new Image(40, 40)).src =
+          "images/" + (symbol.value === "lion" ? "buffalo" : "lion") + ".png";
       } else if (
         symbol.value === "buffalo" &&
         !document.forms["playerNameOne"]["playerOne"].value == ""
@@ -187,10 +191,14 @@ btnPlayerNameOne.addEventListener("click", () => {
         document.getElementById("lion2").style.display = "flex";
         document.getElementById("playerOneName").innerHTML =
           document.forms["playerNameOne"]["playerOne"].value;
-        document.getElementById("playerOneSymbol").innerHTML =
-          '<img src="images/buffalo.png" height="40rem"  />';
-        document.getElementById("playerTwoSymbol").innerHTML =
-          '<img src="images/lion.png" height="40rem"  />';
+        document
+          .getElementById("playerOneSymbol")
+          .appendChild(new Image(40, 40)).src =
+          "images/" + symbol.value + ".png";
+        document
+          .getElementById("playerTwoSymbol")
+          .appendChild(new Image(40, 40)).src =
+          "images/" + (symbol.value === "lion" ? "buffalo" : "lion") + ".png";
       }
     } else if (
       !symbol.checked &&
@@ -222,10 +230,14 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         document.querySelector(".playerTwoDetails").style.display = "none";
         document.getElementById("playerOneName").innerHTML =
           document.forms["onlyOnePlayer"]["playerOne"].value;
-        document.getElementById("playerOneSymbol").innerHTML =
-          '<img src="images/lion.png" height="40rem"  />';
-        document.getElementById("computerSymbol").innerHTML =
-          '<img src="images/buffalo.png" height="40rem"  />';
+        document
+          .getElementById("playerOneSymbol")
+          .appendChild(new Image(40, 40)).src =
+          "images/" + symbol.value + ".png";
+        document
+          .getElementById("computerSymbol")
+          .appendChild(new Image(40, 40)).src =
+          "images/" + (symbol.value === "lion" ? "buffalo" : "lion") + ".png";
       } else if (
         symbol.value === "buffalo" &&
         !document.forms["onlyOnePlayer"]["playerOne"].value == ""
@@ -235,10 +247,14 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         document.querySelector(".playerTwoDetails").style.display = "none";
         document.getElementById("playerOneName").innerHTML =
           document.forms["onlyOnePlayer"]["playerOne"].value;
-        document.getElementById("playerOneSymbol").innerHTML =
-          '<img src="images/buffalo.png" height="40rem"  />';
-        document.getElementById("computerSymbol").innerHTML =
-          '<img src="images/lion.png" height="40rem"  />';
+        document
+          .getElementById("playerOneSymbol")
+          .appendChild(new Image(40, 40)).src =
+          "images/" + symbol.value + ".png";
+        document
+          .getElementById("computerSymbol")
+          .appendChild(new Image(40, 40)).src =
+          "images/" + (symbol.value === "lion" ? "buffalo" : "lion") + ".png";
       }
     } else if (
       !symbol.checked &&
@@ -288,6 +304,12 @@ btnPlayerNameTwo.addEventListener("click", () => {
     const render = () => {
       gridArray.forEach((mark, index) => {
         cells[index].textContent = gridArray[index];
+        if (mark) {
+          const img = document.createElement("img");
+          img.src = mark.src;
+          img.height = 40;
+          cells[index].append(img);
+        }
       });
     };
 
@@ -332,7 +354,12 @@ btnPlayerNameTwo.addEventListener("click", () => {
   const gamePlay = (() => {
     const playerOneName = document.getElementById("playerOneName").textContent;
     const playerTwoName = document.getElementById("playerTwoName").textContent;
+    const player1Symbol = document.querySelector("#playerOneSymbol").innerHTML;
+    const player2Symbol = document.querySelector("#playerTwoSymbol").innerHTML;
     const resetbtn = document.querySelector("#reset");
+    /*const parser = new DOMParser();
+    const player1SymbolImg = parser.parseFromString(player1Symbol, "text/html");
+    const player2SymbolImg = parser.parseFromString(player2Symbol, "text/html");*/
     let currentPlayer;
     let player1;
     let player2;
@@ -375,8 +402,8 @@ btnPlayerNameTwo.addEventListener("click", () => {
 
     const gameInit = () => {
       if (playerOneName !== "" && playerTwoName !== "") {
-        player1 = playerFactory(playerOneName, "X");
-        player2 = playerFactory(playerTwoName, "O");
+        player1 = playerFactory(playerOneName, player1Symbol);
+        player2 = playerFactory(playerTwoName, player2Symbol);
         currentPlayer = player1;
         console.log(playerOneName);
         gameRound();
