@@ -374,12 +374,9 @@ btnPlayerNameTwo.addEventListener("click", () => {
     };
 
     const gameInit = () => {
-      if (
-        playerOneName.textContent !== "" &&
-        playerTwoName.textContent !== ""
-      ) {
-        player1 = playerFactory(playerOneName.textContent, "X");
-        player2 = playerFactory(playerTwoName.textContent, "O");
+      if (playerOneName !== "" && playerTwoName !== "") {
+        player1 = playerFactory(playerOneName, "X");
+        player2 = playerFactory(playerTwoName, "O");
         currentPlayer = player1;
         console.log(playerOneName);
         gameRound();
