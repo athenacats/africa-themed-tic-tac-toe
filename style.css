@@ -76,7 +76,7 @@ form button {
 }
 
 form button:hover {
-  color: var(--form-font);
+  background-color: var(--form-font);
 }
 
 form .radioButtons {
@@ -148,6 +148,11 @@ form .radioButtons {
   background-color: var(--form-font);
   border: 1px solid var(--font-color);
   border-collapse: collapse;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .cell:hover {
@@ -181,6 +186,9 @@ form .radioButtons {
   color: var(--color-primary);
   border: 1px solid var(--form-font);
   box-shadow: 0 0 8px var(--form-color);
+  min-width: 50%;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 button#reset {
@@ -190,6 +198,10 @@ button#reset {
   border-radius: 8px;
   box-shadow: 0 0 8px var(--form-font);
   border: 1px solid var(--form-font);
+  font-family: "Merienda", cursive, "Gill Sans", "Gill Sans MT", Calibri,
+    "Trebuchet MS", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .bufalloIcon {
@@ -215,6 +227,9 @@ button#reset {
   box-shadow: 0 0 8px var(--form-font);
   border: 1px solid var(--form-font);
   padding: 8px;
+  min-width: 70%;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 img {
