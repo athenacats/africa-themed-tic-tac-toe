@@ -184,7 +184,7 @@ btnPlayerNameTwo.addEventListener("click", () => {
         if (mark) {
           const img = document.createElement("img");
           img.src = mark;
-          img.height = 40;
+          img.height = 80;
           cells[index].append(img);
         }
       });

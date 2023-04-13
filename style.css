@@ -157,6 +157,8 @@ form .radioButtons {
 
 .cell:hover {
   cursor: pointer;
+  border: 1px solid var(--form-color);
+  background-color: var(--form-color);
 }
 
 #game {
