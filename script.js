@@ -78,18 +78,18 @@ btnPlayerNameOne.addEventListener("click", () => {
       }
     } else if (
       !symbol.checked &&
-      document.forms["playerNameOne"]["playerOne"].value == ""
+      document.forms["playerNameOne"]["playerOne"].value === ""
     ) {
-      document.getElementById("error2").style.display = "flex";
-      document.getElementById("error2").style.color = "red";
-      document.getElementById("error2").style.fontSize = "1rem";
+      document.getElementById("error3").style.display = "flex";
+      document.getElementById("error3").style.color = "red";
+      document.getElementById("error3").style.fontSize = "1rem";
     } else if (
       symbol.checked &&
-      document.forms["playerNameOne"]["playerOne"].value == ""
+      document.forms["playerNameOne"]["playerOne"].value === ""
     ) {
-      document.getElementById("error2").style.display = "flex";
-      document.getElementById("error2").style.color = "red";
-      document.getElementById("error2").style.fontSize = "1rem";
+      document.getElementById("error3").style.display = "flex";
+      document.getElementById("error3").style.color = "red";
+      document.getElementById("error3").style.fontSize = "1rem";
     }
   }
 });
