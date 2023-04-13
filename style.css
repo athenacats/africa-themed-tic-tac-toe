@@ -109,6 +109,12 @@ form .radioButtons {
   transform: translate(-50%, -50%);
 }
 
+p#buffalo2,
+p#lion2 {
+  text-align: center;
+  justify-content: center;
+}
+
 .playerNameOne input[type="text"],
 .playerNameTwo input[type="text"],
 .onlyOnePlayer input[type="text"] {
@@ -164,7 +170,7 @@ form .radioButtons {
 #game {
   display: none;
   grid-template-columns: 1fr 4fr;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
@@ -242,4 +248,7 @@ button#reset:hover {
 
 img {
   height: 3rem;
+}
+
+.grid {
 }
