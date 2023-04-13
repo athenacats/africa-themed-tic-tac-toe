@@ -1,133 +1,3 @@
-/*const game = () => {
-  let gameBoard = ["", "", "", "", "", "", "", "", ""];
-  let currentPlayer = "";
-  let playerOneName = "";
-  let playerOneSymbol = "";
-  let playerTwoName = "";
-  let playerTwoSymbol = "";
-  let computerName = "Computer";
-  let computerSymbol = "";
-  let numberOfPlayers = "";
-  let winner = "";
-
-  const getGameBoard = () => gameBoard;
-  const getCurrentPlayer = () => currentPlayer;
-  const getPlayerOneName = () => playerOneName;
-  const getPlayerOneSymbol = () => playerOneSymbol;
-  const getPlayerTwoName = () => playerTwoName;
-  const getPlayerTwoSymbol = () => playerTwoSymbol;
-  const getComputerName = () => computerName;
-  const getComputerSymbol = () => computerSymbol;
-  const getNumberOfPlayers = () => numberOfPlayers;
-  const getWinner = () => winner;
-
-  const setGameBoard = (board) => {
-    gameBoard = board;
-  };
-
-  const setCurrentPlayer = (newCurrentPlayer) => {
-    currentPlayer = newCurrentPlayer;
-  };
-
-  const setPlayerOneName = (newPlayerOneName) => {
-    playerOneName = newPlayerOneName;
-  };
-
-  const setPlayerOneSymbol = (newPlayerOneSymbol) => {
-    playerOneSymbol = newPlayerOneSymbol;
-  };
-
-  const setPlayerTwoName = (newPlayerTwoName) => {
-    playerTwoName = newPlayerTwoName;
-  };
-
-  const setPlayerTwoSymbol = (newPlayerTwoSymbol) => {
-    playerTwoSymbol = newPlayerTwoSymbol;
-  };
-
-  const setComputerSymbol = (newComputerSymbol) => {
-    computerSymbol = newComputerSymbol;
-  };
-
-  const setNumberOfPlayers = (newNumberOfPlayers) => {
-    numberOfPlayers = newNumberOfPlayers;
-  };
-
-  const setWinner = (newWinner) => {
-    winner = newWinner;
-  };
-
-  const checkForWinner = () => {
-    const winningCombinations = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-
-    const winningCombinationsLength = winningCombinations.length;
-
-    for (let i = 0; i < winningCombinationsLength; i++) {
-      const [a, b, c] = winningCombinations[i];
-      if (
-        gameBoard[a] !== "" &&
-        gameBoard[a] === gameBoard[b] &&
-        gameBoard[b] === gameBoard[c]
-      ) {
-        setWinner(currentPlayer);
-        return true;
-      }
-    }
-
-    if (!gameBoard.includes("")) {
-      setWinner("tie");
-      return true;
-    }
-    return false;
-  };
-
-  const resetGame = () => {
-    setGameBoard(["", "", "", "", "", "", "", "", ""]);
-    setCurrentPlayer("");
-    setPlayerOneName("");
-    setPlayerOneSymbol("");
-    setPlayerTwoName("");
-    setPlayerTwoSymbol("");
-    setComputerSymbol("");
-    setNumberOfPlayers("");
-    setWinner("");
-  };
-
-  return {
-    getGameBoard,
-    getCurrentPlayer,
-    getPlayerOneName,
-    getPlayerOneSymbol,
-    getPlayerTwoName,
-    getPlayerTwoSymbol,
-    getComputerSymbol,
-    getComputerName,
-    getNumberOfPlayers,
-    getWinner,
-    setGameBoard,
-    setCurrentPlayer,
-    setPlayerOneName,
-    setPlayerOneSymbol,
-    setPlayerTwoName,
-    setPlayerTwoSymbol,
-    setComputerSymbol,
-    setComputerSymbol,
-    setNumberOfPlayers,
-    setWinner,
-    resetGame,
-    checkForWinner,
-  };
-};*/
-
 const btnChoosePlayers = document.getElementById("btnChoosePlayers");
 const btnPlayerNameOne = document.getElementById("btnPlayerNameOne");
 const btnPlayerNameTwo = document.getElementById("btnPlayerNameTwo");
@@ -141,6 +11,9 @@ const onlyOnePlayer = document.getElementById("onlyOnePlayer");
 const numberOfPlayersRadios = document.querySelectorAll(
   'input[name="numberOfPlayers"]'
 );
+
+let player1Symbol;
+let player2Symbol;
 
 btnChoosePlayers.addEventListener("click", () => {
   for (const numberOfPlayersRadio of numberOfPlayersRadios) {
@@ -165,6 +38,9 @@ const symbols = document.querySelectorAll('input[name="symbol"]');
 btnPlayerNameOne.addEventListener("click", () => {
   for (const symbol of symbols) {
     if (symbol.checked) {
+      player1Symbol = "images/" + symbol.value + ".png";
+      player2Symbol =
+        "images/" + (symbol.value === "lion" ? "buffalo" : "lion") + ".png";
       if (
         symbol.value === "lion" &&
         !document.forms["playerNameOne"]["playerOne"].value == ""
@@ -307,7 +183,7 @@ btnPlayerNameTwo.addEventListener("click", () => {
         cells[index].innerHTML = "";
         if (mark) {
           const img = document.createElement("img");
-          img.src = mark.src;
+          img.src = mark;
           img.height = 40;
           cells[index].append(img);
         }
@@ -355,8 +231,6 @@ btnPlayerNameTwo.addEventListener("click", () => {
   const gamePlay = (() => {
     const playerOneName = document.getElementById("playerOneName").textContent;
     const playerTwoName = document.getElementById("playerTwoName").textContent;
-    const player1Symbol = document.querySelector("#playerOneSymbol img");
-    const player2Symbol = document.querySelector("#playerTwoSymbol img");
     const resetbtn = document.querySelector("#reset");
     /*const parser = new DOMParser();
     const player1SymbolImg = parser.parseFromString(player1Symbol, "text/html");

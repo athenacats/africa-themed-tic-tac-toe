@@ -216,3 +216,7 @@ button#reset {
   border: 1px solid var(--form-font);
   padding: 8px;
 }
+
+img {
+  height: 3rem;
+}
