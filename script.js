@@ -295,9 +295,6 @@ btnPlayerNameTwo.addEventListener("click", () => {
   });*/
 
     resetbtn.addEventListener("click", () => {
-      document.querySelector(".winnertext").textContent = "Let's Play!";
-      document.querySelector("#player1").value = "";
-      document.querySelector("#player2").value = "";
       window.location.reload();
     });
     return {
