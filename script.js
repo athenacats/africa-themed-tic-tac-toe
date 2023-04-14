@@ -154,14 +154,28 @@ btnOnlyOnePlayer.addEventListener("click", () => {
       document.getElementById("error2").style.fontSize = "1rem";
     }
   }
-  const playerFactory = (name, mark) => {
+  const playerFactory = (name, mark, isHuman) => {
     const playerTurn = (grid, cell) => {
-      const index = grid.cells.findIndex(function (position) {
-        return position === cell;
-      });
-      if (grid.gridArray[index] === "") {
+      if (isHuman) {
+        const index = grid.cells.findIndex(function (position) {
+          return position === cell;
+        });
+        if (grid.gridArray[index] === "") {
+          grid.render();
+          return index;
+        }
+      } else {
+        const availableCells = grid.cells.filter(function (cell) {
+          return cell.textContent === "";
+        });
+        const index = Math.floor(Math.random() * availableCells.length);
+        const cell = availableCells[index];
+        const index2 = grid.cells.findIndex(function (position) {
+          return position === cell;
+        });
+        grid.gridArray[index2] = mark;
         grid.render();
-        return index;
+        return index2;
       }
       return null;
     };
@@ -178,6 +192,7 @@ btnOnlyOnePlayer.addEventListener("click", () => {
       gridArray.forEach((mark, index) => {
         cells[index].textContent = gridArray[index];
         cells[index].innerHTML = "";
+        //cells[index].addEventListener("click", turnClick, false);
         if (mark) {
           const img = document.createElement("img");
           img.src = mark;
@@ -186,6 +201,38 @@ btnOnlyOnePlayer.addEventListener("click", () => {
         }
       });
     };
+
+    /*function turnClick(square) {
+      turn(square.target.id, player1);
+    }
+
+    function turn(squareId, player) {
+      gridArray[squareId] = player;
+      document.getElementById(squareId).innerText = player;
+      let gameWon = checkWin(gridArray, player);
+      if (gameWon) gameOver(gameWon);
+    }
+
+    function checkWin(board, player) {
+      let plays = board.reduce(
+        (a, e, i) => (e === player ? a.concat(i) : a),
+        []
+      );
+      let gameWon = null;
+      for (let [index, win] of winningArrays.entries()) {
+        if (win.every((elem) => plays.indexOf(elem) > -1)) {
+          gameWon = { index: index, player: player };
+          break;
+        }
+      }
+      return gameWon;
+    }
+
+    function gameOver(gameWon) {
+      for (var i = 0; i < cells.length; i++) {
+        cells[i].removeEventListener('click', turnClick, false);
+      }
+    }*/
 
     const reset = () => {
       gridArray = ["", "", "", "", "", "", "", "", ""];
@@ -232,10 +279,16 @@ btnOnlyOnePlayer.addEventListener("click", () => {
     let currentPlayer;
     let player1;
     let player2;
-    console.log(playerOneName);
+    let isHumanTurn = true;
 
     const switchTurn = () => {
-      currentPlayer = currentPlayer === player1 ? player2 : player1;
+      isHumanTurn = !isHumanTurn;
+      currentPlayer = isHumanTurn ? player1 : player2;
+      if (!isHumanTurn) {
+        setTimeout(() => {
+          currentPlayer.playerTurn(gridModule, null);
+        }, 1000);
+      }
     };
 
     const gameRound = () => {
@@ -248,31 +301,29 @@ btnOnlyOnePlayer.addEventListener("click", () => {
       }
 
       grid.gameBoard.addEventListener("click", (event) => {
-        event.preventDefault();
-        const play = currentPlayer.playerTurn(grid, event.target);
-        if (play !== null) {
-          grid.gridArray[play] = `${currentPlayer.mark}`;
-          grid.render();
-          const winStatus = grid.checkWinner();
-          if (winStatus === "Tie") {
-            gameStatus.textContent = "It's a tie!";
-          } else if (winStatus === null) {
-            switchTurn();
-            gameStatus.textContent = `${currentPlayer.name}'s Turn`;
-          } else {
-            gameStatus.textContent = `The winner is ${currentPlayer.name}!`;
-            grid.reset();
-            grid.render();
+        if (event.target.classList.contains("cell")) {
+          const cell = event.target;
+          const index = currentPlayer.playerTurn(grid, cell);
+          if (index !== null) {
+            const result = grid.checkWinner();
+            if (result !== null) {
+              gameStatus.textContent =
+                result === "Tie"
+                  ? "It's a Tie!"
+                  : `${currentPlayer.name} Wins!`;
+              grid.gameBoard.removeEventListener("click", arguments.callee);
+            } else {
+              switchTurn();
+            }
           }
         }
       });
-      return playerOneName;
     };
 
     const gameInit = () => {
       if (playerOneName !== "" && aiName !== "") {
-        player1 = playerFactory(playerOneName, onePlayerSymbol);
-        player2 = playerFactory(aiName, aiSymbol);
+        player1 = playerFactory(playerOneName, onePlayerSymbol, true);
+        player2 = playerFactory(aiName, aiSymbol, false);
         currentPlayer = player1;
         console.log(playerOneName);
         gameRound();
@@ -286,6 +337,59 @@ btnOnlyOnePlayer.addEventListener("click", () => {
       gameInit,
     };
   })();
+
+  function minimax(newBoard, player) {
+    let availableSpots = emptyIndexes(newBoard);
+
+    if (winning(newBoard, onePlayerSymbol)) {
+      return { score: -10 };
+    } else if (winning(newBoard, aiSymbol)) {
+      return { score: 10 };
+    } else if (availableSpots.length === 0) {
+      return { score: 0 };
+    }
+
+    let moves = [];
+
+    for (let i = 0; i < availableSpots.length; i++) {
+      let move = {};
+      move.index = newBoard[availableSpots[i]];
+      newBoard[availableSpots[i]] = player;
+
+      if (player === aiSymbol) {
+        let result = minimax(newBoard, onePlayerSymbol);
+        move.score = result.score;
+      } else {
+        let result = minimax(newBoard, aiSymbol);
+        move.score = result.score;
+      }
+
+      newBoard[availableSpots[i]] = move.index;
+
+      moves.push(move);
+    }
+    let bestMove;
+
+    if (currentPlayer === aiSymbol) {
+      let bestScore = -10000;
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score > bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    } else {
+      let bestScore = 10000;
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score < bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    }
+    return moves[bestMove];
+  }
+  minimax();
   gamePlay.gameInit();
 });
 
