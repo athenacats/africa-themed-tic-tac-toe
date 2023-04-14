@@ -421,15 +421,6 @@ btnPlayerNameTwo.addEventListener("click", () => {
       }
     };
 
-    /*btnPlayerNameTwo.addEventListener("Click", (event) => {
-    event.preventDefault();
-    if (playerOneName.textContent !== "" && playerTwoName.textContent !== "") {
-      gameInit();
-    } else {
-      window.location.reload();
-    }
-  });*/
-
     resetbtn.addEventListener("click", () => {
       window.location.reload();
     });
