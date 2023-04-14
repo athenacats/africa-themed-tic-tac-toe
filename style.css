@@ -17,6 +17,14 @@ body {
   --details-shadow: #001a25;
 }
 
+.lightTheme {
+  --color-primary: #fff4e1;
+  --font-color: #d56c33;
+  --form-color: #93b675;
+  --form-font: #f0c16a;
+  --details-shadow: #001a25;
+}
+
 body {
   background-color: var(--color-primary);
 }
@@ -26,11 +34,26 @@ body {
   height: 100vh;
 }
 
-h1 {
+.header {
+  display: flex;
+  justify-content: space-around;
   padding-top: 40px;
+  align-items: center;
+}
+
+h1 {
   text-align: center;
   color: var(--font-color);
   font-size: 3rem;
+}
+
+svg {
+  height: 2rem;
+  cursor: pointer;
+}
+
+svg path {
+  fill: var(--font-color);
 }
 
 .choosePlayers {
@@ -236,7 +259,7 @@ button#reset:hover {
 
 .winnerBanner {
   background-color: var(--form-font);
-  color: var(--details-shadow);
+  color: var(--color-primary);
   border-radius: 8px;
   box-shadow: 0 0 8px var(--form-font);
   border: 1px solid var(--form-font);

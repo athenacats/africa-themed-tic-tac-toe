@@ -304,3 +304,12 @@ btnPlayerNameTwo.addEventListener("click", () => {
 
   gamePlay.gameInit();
 });
+
+const body = document.querySelector("body");
+const theme = document.querySelector(".theme");
+theme.addEventListener("click", () => {
+  document.body.classList.toggle("lightTheme");
+});
+
+localStorage.setItem("theme", "lightTheme");
+localStorage.getItem("theme");
