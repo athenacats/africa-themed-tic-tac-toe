@@ -94,9 +94,15 @@ btnPlayerNameOne.addEventListener("click", () => {
   }
 });
 
+let onePlayerSymbol;
+let aiSymbol;
+
 btnOnlyOnePlayer.addEventListener("click", () => {
   for (const symbol of symbols) {
     if (symbol.checked) {
+      onePlayerSymbol = "images/" + symbol.value + ".png";
+      aiSymbol =
+        "images/" + (symbol.value === "lion" ? "buffalo" : "lion") + ".png";
       if (
         symbol.value === "lion" &&
         !document.forms["onlyOnePlayer"]["playerOne"].value == ""
@@ -148,6 +154,148 @@ btnOnlyOnePlayer.addEventListener("click", () => {
       document.getElementById("error2").style.fontSize = "1rem";
     }
   }
+  const playerFactory = (name, mark) => {
+    const playerTurn = (grid, cell) => {
+      const index = grid.cells.findIndex(function (position) {
+        return position === cell;
+      });
+      if (grid.gridArray[index] === "") {
+        grid.render();
+        return index;
+      }
+      return null;
+    };
+    return { name, mark, playerTurn };
+  };
+
+  const gridModule = (() => {
+    let gridArray = ["", "", "", "", "", "", "", "", ""];
+    const gameBoard = document.querySelector(".grid");
+    const cells = Array.from(document.querySelectorAll(".cell"));
+    let winner = null;
+
+    const render = () => {
+      gridArray.forEach((mark, index) => {
+        cells[index].textContent = gridArray[index];
+        cells[index].innerHTML = "";
+        if (mark) {
+          const img = document.createElement("img");
+          img.src = mark;
+          img.height = 80;
+          cells[index].append(img);
+        }
+      });
+    };
+
+    const reset = () => {
+      gridArray = ["", "", "", "", "", "", "", "", ""];
+    };
+
+    const checkWinner = () => {
+      const winningArrays = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      winningArrays.forEach((combo) => {
+        if (
+          gridArray[combo[0]] &&
+          gridArray[combo[0]] === gridArray[combo[1]] &&
+          gridArray[combo[0]] === gridArray[combo[2]]
+        ) {
+          winner = "current";
+        }
+      });
+      return winner || (gridArray.includes("") ? null : "Tie");
+    };
+
+    return {
+      render,
+      gameBoard,
+      cells,
+      gridArray,
+      checkWinner,
+      reset,
+    };
+  })();
+
+  const gamePlay = (() => {
+    const playerOneName = document.getElementById("playerOneName").textContent;
+    const playerTwoName = document.getElementById("playerOneName").textContent;
+    const resetbtn = document.querySelector("#reset");
+    let currentPlayer;
+    let player1;
+    let player2;
+    console.log(playerOneName);
+
+    const switchTurn = () => {
+      currentPlayer = currentPlayer === player1 ? player2 : player1;
+    };
+
+    const gameRound = () => {
+      const grid = gridModule;
+      const gameStatus = document.querySelector(".winnertext");
+      if (currentPlayer.name !== "") {
+        gameStatus.textContent = `${currentPlayer.name}'s Turn`;
+      } else {
+        gameStatus.textContent = "Let's Play!";
+      }
+
+      grid.gameBoard.addEventListener("click", (event) => {
+        event.preventDefault();
+        const play = currentPlayer.playerTurn(grid, event.target);
+        if (play !== null) {
+          grid.gridArray[play] = `${currentPlayer.mark}`;
+          grid.render();
+          const winStatus = grid.checkWinner();
+          if (winStatus === "Tie") {
+            gameStatus.textContent = "It's a tie!";
+          } else if (winStatus === null) {
+            switchTurn();
+            gameStatus.textContent = `${currentPlayer.name}'s Turn`;
+          } else {
+            gameStatus.textContent = `The winner is ${currentPlayer.name}!`;
+            grid.reset();
+            grid.render();
+          }
+        }
+      });
+      return playerOneName;
+    };
+
+    const gameInit = () => {
+      if (playerOneName !== "" && playerTwoName !== "") {
+        player1 = playerFactory(playerOneName, onePlayerSymbol);
+        player2 = playerFactory(playerTwoName, aiSymbol);
+        currentPlayer = player1;
+        console.log(playerOneName);
+        gameRound();
+      }
+    };
+
+    /*btnPlayerNameTwo.addEventListener("Click", (event) => {
+    event.preventDefault();
+    if (playerOneName.textContent !== "" && playerTwoName.textContent !== "") {
+      gameInit();
+    } else {
+      window.location.reload();
+    }
+  });*/
+
+    resetbtn.addEventListener("click", () => {
+      window.location.reload();
+    });
+    return {
+      gameInit,
+    };
+  })();
+  gamePlay.gameInit();
 });
 
 btnPlayerNameTwo.addEventListener("click", () => {
@@ -232,9 +380,6 @@ btnPlayerNameTwo.addEventListener("click", () => {
     const playerOneName = document.getElementById("playerOneName").textContent;
     const playerTwoName = document.getElementById("playerTwoName").textContent;
     const resetbtn = document.querySelector("#reset");
-    /*const parser = new DOMParser();
-    const player1SymbolImg = parser.parseFromString(player1Symbol, "text/html");
-    const player2SymbolImg = parser.parseFromString(player2Symbol, "text/html");*/
     let currentPlayer;
     let player1;
     let player2;
