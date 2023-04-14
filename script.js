@@ -227,7 +227,7 @@ btnOnlyOnePlayer.addEventListener("click", () => {
 
   const gamePlay = (() => {
     const playerOneName = document.getElementById("playerOneName").textContent;
-    const playerTwoName = document.getElementById("playerOneName").textContent;
+    const aiName = document.getElementById("computerName").textContent;
     const resetbtn = document.querySelector("#reset");
     let currentPlayer;
     let player1;
@@ -270,23 +270,14 @@ btnOnlyOnePlayer.addEventListener("click", () => {
     };
 
     const gameInit = () => {
-      if (playerOneName !== "" && playerTwoName !== "") {
+      if (playerOneName !== "" && aiName !== "") {
         player1 = playerFactory(playerOneName, onePlayerSymbol);
-        player2 = playerFactory(playerTwoName, aiSymbol);
+        player2 = playerFactory(aiName, aiSymbol);
         currentPlayer = player1;
         console.log(playerOneName);
         gameRound();
       }
     };
-
-    /*btnPlayerNameTwo.addEventListener("Click", (event) => {
-    event.preventDefault();
-    if (playerOneName.textContent !== "" && playerTwoName.textContent !== "") {
-      gameInit();
-    } else {
-      window.location.reload();
-    }
-  });*/
 
     resetbtn.addEventListener("click", () => {
       window.location.reload();
