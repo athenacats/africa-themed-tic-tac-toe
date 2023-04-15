@@ -1,20 +1,25 @@
-let lightMode = localStorage.getItem("lightMode");
-const lightModeToggle = document.querySelector("#lightModeToggle");
+//set local storage for page on load
+let lightMode = localStorage.getItem("lightMode"); //name it whatever you want
+const lightModeToggle = document.querySelector("#lightModeToggle"); //accessed from button on page. on hindsight could have used class on svg
 
+//this function is to enable light mode
 const enableLightMode = () => {
   document.body.classList.add("lightTheme");
-  localStorage.setItem("lightMode", "enabled");
+  localStorage.setItem("lightMode", "enabled"); //the two items in the brackets are keys. i could have named the second one anything like yes, active, etc
 };
 
+//this disables lightmode
 const disableLightMode = () => {
   document.body.classList.remove("lightTheme");
-  localStorage.setItem("lightMode", null);
+  localStorage.setItem("lightMode", null); //same here. second one could have been a string
 };
 
+//checks if lightmode is enabled once a page loads
 if (lightMode === "enabled") {
   enableLightMode();
 }
 
+//toggles between the two themes
 lightModeToggle.addEventListener("click", () => {
   lightMode = localStorage.getItem("lightMode");
   if (lightMode !== "enabled") {
@@ -24,6 +29,7 @@ lightModeToggle.addEventListener("click", () => {
   }
 });
 
+//need to be accessed as the page loads
 const btnChoosePlayers = document.getElementById("btnChoosePlayers");
 const btnPlayerNameOne = document.getElementById("btnPlayerNameOne");
 const btnPlayerNameTwo = document.getElementById("btnPlayerNameTwo");
@@ -38,20 +44,26 @@ const numberOfPlayersRadios = document.querySelectorAll(
   'input[name="numberOfPlayers"]'
 );
 
+//need to be here so that they can be accessed in btnPlayerNameTwo
 let player1Symbol;
 let player2Symbol;
 
+//first button on first form
 btnChoosePlayers.addEventListener("click", () => {
   for (const numberOfPlayersRadio of numberOfPlayersRadios) {
+    //for all the radios, ie two
     if (numberOfPlayersRadio.checked) {
       if (numberOfPlayersRadio.value === "twoPlayers") {
+        //hide first form, show playernameone form
         choosePlayers.style.display = "none";
         playerNameOne.style.display = "flex";
       } else if (numberOfPlayersRadio.value === "onePlayer") {
+        //same logic
         choosePlayers.style.display = "none";
         onlyOnePlayer.style.display = "flex";
       }
     } else if (!numberOfPlayersRadio.checked) {
+      //forces user to choose a button
       document.getElementById("error1").style.display = "flex";
       document.getElementById("error1").style.color = "red";
       document.getElementById("error1").style.fontSize = "1rem";
@@ -59,14 +71,17 @@ btnChoosePlayers.addEventListener("click", () => {
   }
 });
 
+//acccesses the symbols that a user selects
 const symbols = document.querySelectorAll('input[name="symbol"]');
 
 btnPlayerNameOne.addEventListener("click", () => {
   for (const symbol of symbols) {
+    //runs through the symbls
     if (symbol.checked) {
-      player1Symbol = "images/" + symbol.value + ".png";
+      player1Symbol = "images/" + symbol.value + ".png"; //set the symbols that will be accessed later
       player2Symbol =
         "images/" + (symbol.value === "lion" ? "buffalo" : "lion") + ".png";
+      //again, the below determine the symbols set for player two and the visibility of the next form
       if (
         symbol.value === "lion" &&
         !document.forms["playerNameOne"]["playerOne"].value == ""
@@ -74,6 +89,7 @@ btnPlayerNameOne.addEventListener("click", () => {
         playerNameOne.style.display = "none";
         playerNameTwo.style.display = "flex";
         document.getElementById("buffalo2").style.display = "flex";
+        //set the details of playerone that will be visible in #game
         document.getElementById("playerOneName").innerHTML =
           document.forms["playerNameOne"]["playerOne"].value;
         document
@@ -102,6 +118,7 @@ btnPlayerNameOne.addEventListener("click", () => {
           .appendChild(new Image(40, 40)).src =
           "images/" + (symbol.value === "lion" ? "buffalo" : "lion") + ".png";
       }
+      //validate whether name is filled and symbol is checked
     } else if (
       !symbol.checked &&
       document.forms["playerNameOne"]["playerOne"].value === ""
@@ -120,6 +137,159 @@ btnPlayerNameOne.addEventListener("click", () => {
   }
 });
 
+//the logic of the game once the second user is done with selecting their name
+btnPlayerNameTwo.addEventListener("click", () => {
+  playerNameTwo.style.display = "none";
+  gameGrid.style.display = "grid";
+  document.querySelector(".computerDetails").style.display = "none";
+  document.getElementById("playerTwoName").innerHTML =
+    document.forms["playerNameTwo"]["playerTwo"].value;
+
+  //stores the details for the two players, ie name and mark(symbo)
+  const playerFactory = (name, mark) => {
+    const playerTurn = (grid, cell) => {
+      //a player turn involves the grid and cells
+      const index = grid.cells.findIndex(function (position) {
+        //index is found and set
+        return position === cell;
+      });
+      if (grid.gridArray[index] === "") {
+        //if index of gridarray is empty, run render function
+        grid.render();
+        return index;
+      }
+      return null; //otherwise dont do aything
+    };
+    return { name, mark, playerTurn };
+  };
+
+  const gridModule = (() => {
+    let gridArray = ["", "", "", "", "", "", "", "", ""]; //set empty array
+    const gameBoard = document.querySelector(".grid");
+    const cells = Array.from(document.querySelectorAll(".cell")); //array of the cells
+    let winner = null;
+
+    const render = () => {
+      //run this function if index was empty
+      gridArray.forEach((mark, index) => {
+        cells[index].textContent = gridArray[index]; //index of cell is same as index of gridarray
+        cells[index].innerHTML = ""; //clear any html in the cell so that we can attach the mark below
+        if (mark) {
+          const img = document.createElement("img"); //create image constant, which depends on the src of the mark. check what the mark is, ie, its equal to player1symbol player2symbol and those are already src links, hence no need to write mark.src
+          img.src = mark;
+          img.height = 80;
+          cells[index].append(img);
+        }
+      });
+    };
+
+    const reset = () => {
+      //functiopn run when we reset, will be linked to reset button.
+      gridArray = ["", "", "", "", "", "", "", "", ""];
+    };
+
+    const checkWinner = () => {
+      //all the winning index arrays
+      const winningArrays = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      winningArrays.forEach((combo) => {
+        //combo [] means index of the numbers from winningarrays
+        if (
+          gridArray[combo[0]] &&
+          gridArray[combo[0]] === gridArray[combo[1]] &&
+          gridArray[combo[0]] === gridArray[combo[2]]
+        ) {
+          winner = "current";
+        }
+      });
+      return winner || (gridArray.includes("") ? null : "Tie"); //if they match, return winner, if theres a '', the winningfunction isnt applicable, else its a tie
+    };
+
+    return {
+      render,
+      gameBoard,
+      cells,
+      gridArray,
+      checkWinner,
+      reset,
+    };
+  })(); //return the above so that they are accessible elsewhere
+
+  const gamePlay = (() => {
+    const playerOneName = document.getElementById("playerOneName").textContent;
+    const playerTwoName = document.getElementById("playerTwoName").textContent;
+    const resetbtn = document.querySelector("#reset");
+    let currentPlayer;
+    let player1; //these will be defined below in the playerfactory
+    let player2;
+
+    const switchTurn = () => {
+      //switching terms between the two
+      currentPlayer = currentPlayer === player1 ? player2 : player1;
+    };
+
+    const gameRound = () => {
+      const grid = gridModule; //the grid is the grid module we generated above
+      const gameStatus = document.querySelector(".winnertext");
+      if (currentPlayer.name !== "") {
+        gameStatus.textContent = `${currentPlayer.name}'s Turn`;
+      } else {
+        gameStatus.textContent = "Let's Play!";
+      }
+
+      grid.gameBoard.addEventListener("click", (event) => {
+        event.preventDefault();
+        const play = currentPlayer.playerTurn(grid, event.target); //to play a mark
+        if (play !== null) {
+          grid.gridArray[play] = `${currentPlayer.mark}`;
+          grid.render();
+          const winStatus = grid.checkWinner();
+          if (winStatus === "Tie") {
+            gameStatus.textContent = "It's a tie!";
+          } else if (winStatus === null) {
+            switchTurn();
+            gameStatus.textContent = `${currentPlayer.name}'s Turn`;
+          } else {
+            gameStatus.textContent = `The winner is ${currentPlayer.name}!`;
+            grid.reset();
+            grid.render();
+          }
+        }
+      });
+      return playerOneName;
+    };
+
+    const gameInit = () => {
+      if (playerOneName !== "" && playerTwoName !== "") {
+        //initialise game
+        player1 = playerFactory(playerOneName, player1Symbol);
+        player2 = playerFactory(playerTwoName, player2Symbol);
+        currentPlayer = player1;
+        gameRound();
+      }
+    };
+
+    resetbtn.addEventListener("click", () => {
+      window.location.reload();
+    });
+    return {
+      gameInit,
+    };
+  })();
+
+  gamePlay.gameInit();
+});
+
+/*the below are for the ai game that is unfinished
 let onePlayerSymbol;
 let aiSymbol;
 
@@ -258,7 +428,7 @@ btnOnlyOnePlayer.addEventListener("click", () => {
       for (var i = 0; i < cells.length; i++) {
         cells[i].removeEventListener('click', turnClick, false);
       }
-    }*/
+    }
 
     const reset = () => {
       gridArray = ["", "", "", "", "", "", "", "", ""];
@@ -417,153 +587,4 @@ btnOnlyOnePlayer.addEventListener("click", () => {
   }
   minimax();
   gamePlay.gameInit();
-});
-
-btnPlayerNameTwo.addEventListener("click", () => {
-  playerNameTwo.style.display = "none";
-  gameGrid.style.display = "grid";
-  document.querySelector(".computerDetails").style.display = "none";
-  document.getElementById("playerTwoName").innerHTML =
-    document.forms["playerNameTwo"]["playerTwo"].value;
-
-  const playerFactory = (name, mark) => {
-    const playerTurn = (grid, cell) => {
-      const index = grid.cells.findIndex(function (position) {
-        return position === cell;
-      });
-      if (grid.gridArray[index] === "") {
-        grid.render();
-        return index;
-      }
-      return null;
-    };
-    return { name, mark, playerTurn };
-  };
-
-  const gridModule = (() => {
-    let gridArray = ["", "", "", "", "", "", "", "", ""];
-    const gameBoard = document.querySelector(".grid");
-    const cells = Array.from(document.querySelectorAll(".cell"));
-    let winner = null;
-
-    const render = () => {
-      gridArray.forEach((mark, index) => {
-        cells[index].textContent = gridArray[index];
-        cells[index].innerHTML = "";
-        if (mark) {
-          const img = document.createElement("img");
-          img.src = mark;
-          img.height = 80;
-          cells[index].append(img);
-        }
-      });
-    };
-
-    const reset = () => {
-      gridArray = ["", "", "", "", "", "", "", "", ""];
-    };
-
-    const checkWinner = () => {
-      const winningArrays = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-      ];
-
-      winningArrays.forEach((combo) => {
-        if (
-          gridArray[combo[0]] &&
-          gridArray[combo[0]] === gridArray[combo[1]] &&
-          gridArray[combo[0]] === gridArray[combo[2]]
-        ) {
-          winner = "current";
-        }
-      });
-      return winner || (gridArray.includes("") ? null : "Tie");
-    };
-
-    return {
-      render,
-      gameBoard,
-      cells,
-      gridArray,
-      checkWinner,
-      reset,
-    };
-  })();
-
-  const gamePlay = (() => {
-    const playerOneName = document.getElementById("playerOneName").textContent;
-    const playerTwoName = document.getElementById("playerTwoName").textContent;
-    const resetbtn = document.querySelector("#reset");
-    let currentPlayer;
-    let player1;
-    let player2;
-    console.log(playerOneName);
-
-    const switchTurn = () => {
-      currentPlayer = currentPlayer === player1 ? player2 : player1;
-    };
-
-    const gameRound = () => {
-      const grid = gridModule;
-      const gameStatus = document.querySelector(".winnertext");
-      if (currentPlayer.name !== "") {
-        gameStatus.textContent = `${currentPlayer.name}'s Turn`;
-      } else {
-        gameStatus.textContent = "Let's Play!";
-      }
-
-      grid.gameBoard.addEventListener("click", (event) => {
-        event.preventDefault();
-        const play = currentPlayer.playerTurn(grid, event.target);
-        if (play !== null) {
-          grid.gridArray[play] = `${currentPlayer.mark}`;
-          grid.render();
-          const winStatus = grid.checkWinner();
-          if (winStatus === "Tie") {
-            gameStatus.textContent = "It's a tie!";
-          } else if (winStatus === null) {
-            switchTurn();
-            gameStatus.textContent = `${currentPlayer.name}'s Turn`;
-          } else {
-            gameStatus.textContent = `The winner is ${currentPlayer.name}!`;
-            grid.reset();
-            grid.render();
-          }
-        }
-      });
-      return playerOneName;
-    };
-
-    const gameInit = () => {
-      if (playerOneName !== "" && playerTwoName !== "") {
-        player1 = playerFactory(playerOneName, player1Symbol);
-        player2 = playerFactory(playerTwoName, player2Symbol);
-        currentPlayer = player1;
-        console.log(playerOneName);
-        gameRound();
-      }
-    };
-
-    resetbtn.addEventListener("click", () => {
-      window.location.reload();
-    });
-    return {
-      gameInit,
-    };
-  })();
-
-  gamePlay.gameInit();
-});
-
-/*const body = document.querySelector("body");
-const theme = document.querySelector(".theme");
-theme.addEventListener("click", () => {
-  document.body.classList.toggle("lightTheme");
 });*/
