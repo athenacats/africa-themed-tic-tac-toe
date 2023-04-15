@@ -1,3 +1,4 @@
+/*for overall styling of page*/
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +10,7 @@ body {
     "Trebuchet MS", sans-serif;
 }
 
+/*i set the default color of the page to be a darker blue*/
 :root {
   --color-primary: #003348;
   --font-color: #d56c33;
@@ -17,6 +19,7 @@ body {
   --details-shadow: #001a25;
 }
 
+/*toggled if user chooses light mode*/
 .lightTheme {
   --color-primary: #fff4e1;
   --font-color: #d56c33;
@@ -30,6 +33,7 @@ body {
 }
 
 .container {
+  /*full page only*/
   margin: auto;
   height: 100vh;
 }
@@ -48,6 +52,8 @@ h1 {
 }
 
 button#lightModeToggle {
+  /*i dont need the background of the button to be visible, only for it to be accessible. 
+  added it once i learnt how to access local storage, otherwise my previous method did not require it*/
   background-color: var(--color-primary);
   outline: none;
   border: none;
@@ -68,7 +74,6 @@ svg path {
 }
 
 .choosePlayers form {
-  /*display: none;*/
   background-color: var(--form-color);
   width: 60%;
   padding: 40px;
@@ -83,7 +88,7 @@ svg path {
   box-shadow: 0 0 16px var(--form-color);
   font-size: 1.2rem;
   margin: 0;
-  position: absolute;
+  position: absolute; /*this whole bit below is what i found on how to center the form on the page smack dab center*/
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
@@ -121,7 +126,6 @@ form .radioButtons {
   background-color: var(--form-color);
   width: 60%;
   padding: 40px;
-  /*display: flex;*/
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
@@ -145,7 +149,7 @@ p#lion2 {
   justify-content: center;
 }
 
-.playerNameOne input[type="text"],
+.playerNameOne input[type="text"], /*this below styles the text input*/
 .playerNameTwo input[type="text"],
 .onlyOnePlayer input[type="text"] {
   width: 80%;
@@ -169,6 +173,7 @@ p#lion2 {
 }
 
 .grid {
+  /*styles the grid. still need to figure out how to center it in the page in its section*/
   display: grid;
   grid-template-columns: repeat(3, minmax(50px, 1fr));
   grid-template-rows: repeat(3, minmax(50px, 1fr));
@@ -179,13 +184,13 @@ p#lion2 {
 .cell {
   background-color: var(--form-font);
   border: 1px solid var(--font-color);
-  border-collapse: collapse;
+  border-collapse: collapse; /*removes double border*/
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1/1; /*keeps the grid square*/
 }
 
 .cell:hover {
@@ -200,7 +205,7 @@ p#lion2 {
   justify-content: space-evenly;
   align-items: center;
   gap: 20px;
-  padding-top: 20px;
+  padding-top: 20px; /*set the padding for the section through this container of game, not each section individually*/
   height: 450px;
 }
 
@@ -248,6 +253,7 @@ button#reset:hover {
 }
 
 .bufalloIcon {
+  /*i don't think i access these icons, found different ways to access them*/
   background-image: url(images/buffalo.png);
   height: 3rem;
   box-sizing: border-box;
@@ -276,6 +282,7 @@ img {
 }
 
 input#onePlayer {
+  /*disabled one player mode till i fix it*/
   cursor: not-allowed;
 }
 
@@ -284,11 +291,13 @@ input[type="radio"] {
 }
 
 @media screen and (max-width: 500px) {
+  /*500px is the width at which the style started to fail*/
   h1 {
     font-size: 2.5rem;
   }
 
   .header {
+    /*grid works better for the header on smaller screens*/
     display: grid;
     grid-template-columns: 5fr 1fr;
   }
@@ -306,6 +315,7 @@ input[type="radio"] {
   }
 
   #game {
+    /*changed it from two col to one col*/
     grid-template-columns: 1fr;
   }
 
@@ -317,7 +327,7 @@ input[type="radio"] {
     justify-content: space-around;
   }
 
-  .playerOneDetails,
+  .playerOneDetails, /*the percentages here, in the gap, in the winnerbanner and padding for the button are what made the details section fit in a row yet still be readable*/
   .playerTwoDetails,
   .computerDetails {
     width: 20%;
@@ -328,7 +338,7 @@ input[type="radio"] {
     display: grid;
     grid-template-columns: repeat(3, minmax(50px, 1fr));
     grid-template-rows: repeat(3, minmax(50px, 1fr));
-    max-width: 100%;
+    max-width: 100%; /*had to put it at 100% because anything less, im nable to center it on page. perhaps could use padding*/
     align-self: center;
     justify-self: center;
   }
