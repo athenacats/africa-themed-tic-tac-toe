@@ -5,6 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>African Tic Tac Toe</title>
+    <script>
+      if (localStorage.getItem("lightMode") === null) {
+        document.documentElement.classList.remove("lightTheme");
+      }
+
+      if (localStorage.getItem("lightMode") === "1") {
+        document.documentElement.classList.add("lightTheme");
+      }
+
+      if (localStorage.getItem("lightMode") === "0") {
+        document.documentElement.classList.remove("lightTheme");
+      }
+    </script>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -162,5 +175,24 @@
         </div>
       </div>
     </div>
+    <script>
+      document
+        .querySelector("#lightModeToggle")
+        .addEventListener("click", function () {
+          let lightMode = localStorage.getItem("lightMode");
+          if (lightMode === null) {
+            localStorage.setItem("lightMode", "1");
+            document.documentElement.classList.add("lightMode");
+          }
+          if (lightMode === "1") {
+            localStorage.setItem("lightMode", "0");
+            document.documentElement.classList.remove("lightMode");
+          }
+          if (lightMode === "0") {
+            localStorage.setItem("lightMode", "1");
+            document.documentElement.classList.add("lightMode");
+          }
+        });
+    </script>
   </body>
 </html>
