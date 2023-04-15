@@ -47,6 +47,12 @@ h1 {
   font-size: 3rem;
 }
 
+button#lightModeToggle {
+  background-color: var(--color-primary);
+  outline: none;
+  border: none;
+}
+
 svg {
   height: 2rem;
   cursor: pointer;

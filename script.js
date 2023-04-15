@@ -1,3 +1,29 @@
+let lightMode = localStorage.getItem("lightMode");
+const lightModeToggle = document.querySelector("#lightModeToggle");
+
+const enableLightMode = () => {
+  document.body.classList.add("lightTheme");
+  localStorage.setItem("lightMode", "enabled");
+};
+
+const disableLightMode = () => {
+  document.body.classList.remove("lightTheme");
+  localStorage.setItem("lightMode", null);
+};
+
+if (lightMode === "enabled") {
+  enableLightMode();
+}
+
+lightModeToggle.addEventListener("click", () => {
+  lightMode = localStorage.getItem("lightMode");
+  if (lightMode !== "enabled") {
+    enableLightMode();
+  } else {
+    disableLightMode();
+  }
+});
+
 const btnChoosePlayers = document.getElementById("btnChoosePlayers");
 const btnPlayerNameOne = document.getElementById("btnPlayerNameOne");
 const btnPlayerNameTwo = document.getElementById("btnPlayerNameTwo");
@@ -536,11 +562,8 @@ btnPlayerNameTwo.addEventListener("click", () => {
   gamePlay.gameInit();
 });
 
-const body = document.querySelector("body");
+/*const body = document.querySelector("body");
 const theme = document.querySelector(".theme");
 theme.addEventListener("click", () => {
   document.body.classList.toggle("lightTheme");
-});
-
-localStorage.setItem("theme", "lightTheme");
-localStorage.getItem("theme");
+});*/
