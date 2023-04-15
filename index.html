@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>African Tic Tac Toe</title>
     <script>
+      //require this to minimize screen flickering if the user had light mode on
       if (localStorage.getItem("lightMode") === null) {
         document.documentElement.classList.remove("lightTheme");
       }
@@ -176,6 +177,7 @@
       </div>
     </div>
     <script>
+      //require this to minimize screen flickering if the user had light mode on
       document
         .querySelector("#lightModeToggle")
         .addEventListener("click", function () {
