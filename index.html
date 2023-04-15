@@ -16,6 +16,7 @@
   </head>
   <body>
     <div class="container">
+      <!--This header shall be constant throughout-->
       <div class="header">
         <h1>African Tic Tac Toe</h1>
         <button id="lightModeToggle" class="lightModeToggle">
@@ -30,6 +31,7 @@
           </svg>
         </button>
       </div>
+      <!--the first form that pops up-->
       <div class="choosePlayers">
         <form id="choosePlayers">
           <p>Choose Number Of Players</p>
@@ -42,6 +44,7 @@
               value="onePlayer"
             />
             <label for="onePlayer">1 Player</label>
+            <!--this button is currently disabled till i implement ai-->
             <input
               type="radio"
               id="twoPlayers"
@@ -57,6 +60,7 @@
         </form>
       </div>
       <div class="onlyOnePlayer">
+        <!--this form wont pop up currently till i enable 1 player-->
         <form id="onlyOnePlayer" name="onlyOnePlayer">
           <label for="playerOne">Player One Name:</label>
           <input
@@ -80,6 +84,7 @@
         </form>
       </div>
       <div class="playerNameOne">
+        <!--in a two player game, first player fills in their details-->
         <form id="playerNameOne" name="playerNameOne">
           <label for="playerOne">Player One Name:</label>
           <input
@@ -103,6 +108,7 @@
         </form>
       </div>
       <div class="playerNameTwo">
+        <!--second player fills in their details-->
         <form id="playerNameTwo">
           <label for="playerTwo">Player Two Name:</label>
           <input
@@ -118,6 +124,7 @@
         </form>
       </div>
       <div id="game">
+        <!--final screen that shows up once game starts-->
         <div class="details">
           <div class="playerOneDetails">
             <h3 id="playerOneName"></h3>
@@ -141,6 +148,7 @@
 
         <div class="gameGrid">
           <div class="grid">
+            <!--i added the ID's when i started to work on the ai version, which is currently unfinished. they aren't used in the two player version-->
             <div class="cell" id="0"></div>
             <div class="cell" id="1"></div>
             <div class="cell" id="2"></div>
