@@ -1,6 +1,6 @@
 # Africa-Themed Tic-Tac-Toe
 
-[![Most Used Language](https://img.shields.io/github/languages/top/athenacats/africa-themed-tic-tac-toe?style=social)](https://github.com/athenacats/africa-themed-tic-tac-toe)
+[![Most Used Language](https://img.shields.io/github/languages/top/athenacats/africa-themed-tic-tac-toe?style=for-the-badge)](https://github.com/athenacats/africa-themed-tic-tac-toe)
 [![HTML](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)]
 [![CSS](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)]
 [![Javascript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)]
