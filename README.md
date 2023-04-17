@@ -1,5 +1,7 @@
 # Africa-Themed Tic-Tac-Toe
 
+[![Most Used Language](https://img.shields.io/github/languages/top/athenacats/africa-themed-tic-tac-toe?style=social)](https://github.com/athenacats/africa-themed-tic-tac-toe)
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -46,4 +48,6 @@ This project is an assignment instructed from [The Odin Project](https://www.the
 
 ## Contact
 
-Reach me on [LinkedIn](https://www.linkedin.com/in/esther-lonyangapuo/) [Email](mailto:chenalonya@gmail.com)
+Reach me on
+[LinkedIn](https://www.linkedin.com/in/esther-lonyangapuo/)
+[Email](mailto:chenalonya@gmail.com)
